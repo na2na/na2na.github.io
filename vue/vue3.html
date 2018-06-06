@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+
+    <div id="vue-app">
+      <h3>v-for</h3>
+
+      <ul>
+        <li v-for="charecter in charecters">
+          {{charecter}}
+        </li>
+      </ul>
+
+      <ul>
+        <li v-for="(user,idx) in users">
+          {{idx+1}}: {{user.name}} = {{user.age}}
+        </li>
+      </ul>
+
+      <template v-for="(user,idx) in users">
+          <h4>{{idx+1}}.{{user.name}}</h4>
+          <p>age:{{user.age}}</p>
+      </template>
+
+      <hr>
+
+      <!-- 多循环 -->
+      <template v-for="(user,idx) in users">
+        <div v-for="(key,val) in user">
+            {{val}}:{{key}}
+        </div>
+      </template>
+    </div>
+
+    <script>
+        new Vue({
+          el:"#vue-app",
+          data:{
+            charecters:['marry','luffy','jack'],
+            users:[
+              {name:'xiaoming',age:29},
+              {name:'hong',age:17},
+              {name:'kangkang',age:26}
+            ]
+          },
+          methods:{},
+          computed:{}
+        })
+    </script>
+  </body>
+</html>

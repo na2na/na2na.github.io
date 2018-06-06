@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <style media="screen">
+    #bag{
+      width: 200px;
+      height: 540px;
+      background: url(img/bag.png) center no-repeat;
+    }
+    #bag.burst{
+      background: url(img/bag-burst.png) center no-repeat;
+    }
+    #bag-health{
+      width: 200px;
+      margin: 10px;
+      border: 2px solid #333;
+    }
+    #bag-health div{
+      height: 20px;
+      background: crimson;
+    }
+    #btns{
+      margin:20px 10px;
+    }
+    #btns button{
+      width: 100px;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="vue-app">
+    <div id="bag" v-bind:class="{burst:ended}"></div>
+    <div id="bag-health">
+      <div v-bind:style="{width:health+'%'}"></div>
+    </div>
+    <div id="btns">
+      <button v-on:click="punch" v-show="!ended">敲击爆炸</button>
+      <button v-on:click="restart">重新开始</button>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#vue-app",
+      data: {
+        health:100,
+        ended:false
+      },
+      methods: {
+        punch:function(){
+          this.health -= 10;
+          if(this.health <= 0){
+            this.ended = true;
+          }
+        },
+        restart:function(){
+          this.ended = false;
+          this.health = 100;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>动态绑定CSS样式</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style media="screen">
+      span{
+        display: inline-block;
+        margin: 10px;
+        padding: 10px;
+        color: white;
+        background: red;
+      }
+      .changeColor span{
+        background: green;
+      }
+      .changeLength span:after{
+        content: "changeLength";
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="vue-app">
+      <p>动态绑定样式-实例1</p>
+      <div v-on:click="{changeColor = !changeColor}" v-bind:class="{changeColor:changeColor}">
+          <span>HELLO WORLD!</span>
+      </div>
+
+      <p>动态绑定样式-实例2</p>
+      <button v-on:click="changeColor = !changeColor">change color</button>
+      <button v-on:click="changeLength=!changeLength">change length</button>
+      <div v-bind:class="compClass">
+          <span>HELLO WORLD!</span>
+      </div>
+    </div>
+
+    <script>
+        new Vue({
+          el:"#vue-app",
+          data:{
+            changeColor:false,
+            changeLength:false
+          },
+          // methods:{},
+          computed:{
+            compClass:function(){
+              return {
+                changeColor:this.changeColor,
+                changeLength:this.changeLength
+              }
+            }
+          }
+        })
+    </script>
+  </body>
+</html>
