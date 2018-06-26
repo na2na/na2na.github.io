@@ -14,7 +14,8 @@ function btnsEvent(){
         timer;
 
     //设置默认左偏移量
-    swiperBox.style.left = 0; 
+    swiperBox.style.left = 0;
+    console.log(swiperBox.style.width)
     
     // 创建分页器函数
     function createDom(target,tagName,innerTxt){
@@ -36,9 +37,7 @@ function btnsEvent(){
         prevBtn.style.opacity = num;
         nextBtn.style.opacity = num;
     }
-
-
-
+    
     // 动画
     function animates(offset){
         var n=0;
@@ -77,24 +76,25 @@ function btnsEvent(){
             paginationSpan[index].className = 'on';
         }
         
-        // 清除兄弟元素样式
-        function siblings(target){
-            var siblings = target.parentNode.childNodes;
-            for(var m = 0; m<siblings.length; m++){
-                siblings[m].className = '';
+    }
+
+    // 清除兄弟元素样式
+    function siblings(target){
+        var siblings = target.parentNode.childNodes;
+        for(var m = 0; m<siblings.length; m++){
+            siblings[m].className = '';
+        }
+    }
+    
+    // 遍历分页元素，添加点击事件
+    for(; j<paginationSpan.length; j++){
+        (function(j){
+            paginationSpan[j].onclick = function(){
+                siblings(this);
+                swiperBox.style.left = -itemsWidth * j + 'px';
+                paginationSpan[j].className = 'on';
             }
-        }
-        
-        // 遍历
-        for(; j<paginationSpan.length; j++){
-            (function(j){
-                paginationSpan[j].onclick = function(){
-                    siblings(this);
-                    swiperBox.style.left = -itemsWidth * j + 'px';
-                    paginationSpan[j].className = 'on';
-                }
-            }(j))
-        }
+        }(j))
     }
 
     // next
