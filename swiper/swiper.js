@@ -8,14 +8,13 @@ function btnsEvent(){
         nextBtn = document.getElementById('next'),
         itemsLen = swiperBox.getElementsByClassName('item').length,
         // 设置每一帧宽度
-        itemsWidth = 750,
+        itemsWidth = swiperBox.getElementsByClassName('item')[0].offsetWidth,
         i = 0,
         j = 0,
+        k = 0,
         timer;
-
     //设置默认左偏移量
-    swiperBox.style.left = 0;
-    console.log(swiperBox.style.width)
+    swiperBox.style.left = swiperBox.offsetLeft;
     
     // 创建分页器函数
     function createDom(target,tagName,innerTxt){
@@ -44,49 +43,43 @@ function btnsEvent(){
 
         // parseInt(swiperBox.style.left)获取当前盒子的偏移量（非初始值）并转为数字
         // offset设置偏移量
-        var swiperLeft = parseInt(swiperBox.style.left) + offset;
+        // var swiperLeft = parseInt(swiperBox.style.left) + offset;
+        var swiperLeft = swiperBox.offsetLeft + offset;
+
+        if(swiperLeft <= -itemsWidth*itemsLen) {
+            // 最后一帧，重置盒子偏移量为0
+            swiperBox.style.left = 0;
+        } else if(swiperLeft > 0) {
+            /** 
+             * 在第一帧点击上一张，则从最后一帧倒序播放
+             * itemsLen-1即减去了最后一帧本身的宽度
+             */
+            swiperBox.style.left = -itemsWidth*(itemsLen-1) + 'px';
+        }else{
+            // 每次点击操作，盒子偏移量加处理一次
+            swiperBox.style.left = swiperLeft + 'px';
+        }
 
         // 获取当前索引
-        var index = -swiperLeft / itemsWidth;
-
-        // 每次点击操作，盒子偏移量加处理一次
-        swiperBox.style.left = swiperLeft + 'px';
-        // 最后一帧，重置盒子偏移量为0
-        if(swiperLeft <= -itemsWidth*itemsLen) {
-            swiperBox.style.left = 0;
-        }
-        /** 
-         * 在第一帧点击上一张，则从最后一帧倒序播放
-         * itemsLen-1即减去了最后一帧本身的宽度
-         */
-        if(swiperLeft > 0) {
-            swiperBox.style.left = -itemsWidth*(itemsLen-1) + 'px';
-        }
-
+        var index = Math.abs( parseInt(swiperBox.style.left) / itemsWidth);
+        
         // 循环所有分页元素并清除样式
-        for(; n<index; n++){
+        for(; n<paginationSpan.length; n++){
             paginationSpan[n].className = '';
         }
-        
-        // 如果为最后一帧，则给第一个分页元素增加样式on
-        if(index == itemsLen){
-            paginationSpan[0].className = 'on';
-        }else{
-            // 当前索引下，分页元素增加样式--自动播放调用时，index==1
-            paginationSpan[index].className = 'on';
-        }
-        
+        paginationSpan[index].className = 'on';
+
     }
 
     // 清除兄弟元素样式
     function siblings(target){
         var siblings = target.parentNode.childNodes;
-        for(var m = 0; m<siblings.length; m++){
-            siblings[m].className = '';
+        for(; k<siblings.length; k++){
+            siblings[k].className = '';
         }
     }
-    
-    // 遍历分页元素，添加点击事件
+
+    // 遍历分页器元素，使用闭包达到点击当前元素效果
     for(; j<paginationSpan.length; j++){
         (function(j){
             paginationSpan[j].onclick = function(){
@@ -110,8 +103,11 @@ function btnsEvent(){
     function autoplay(){
         timer = setInterval(function(){
             nextBtn.onclick();
+            // prevBtn.onclick();
+
         },1000);
     }
+    autoplay(); // 默认自动播放
     
     // 鼠标经过停止播放
     function stop(){
@@ -126,6 +122,6 @@ function btnsEvent(){
         btnsStyle(0); // 按钮隐藏
     }
     btnsStyle(0); // 默认隐藏
-    autoplay(); // 默认自动播放
+    
 }
 btnsEvent();

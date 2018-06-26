@@ -1,13 +1,15 @@
-*,html{
+*,
+html {
     margin: 0;
     padding: 0;
     font-size: 14px;
 }
-ul{
+
+ul {
     list-style: none;
 }
 
-.container{
+.container {
     position: relative;
     margin: 50px;
     width: 750px;
@@ -15,13 +17,15 @@ ul{
     border: 1px solid #ccc;
     overflow: hidden;
 }
-.swiper{
+
+.swiper {
     position: absolute;
     left: 0px;
     height: 350px;
     overflow: hidden;
 }
-.swiper .item{
+
+.item {
     float: left;
     width: 750px;
     height: 350px;
@@ -29,7 +33,7 @@ ul{
 }
 
 /* btns */
-.pagination{
+.pagination {
     position: absolute;
     z-index: 99;
     bottom: 0;
@@ -40,7 +44,8 @@ ul{
     background: rgba(55, 55, 55, 0.3);
     box-shadow: 0 -3px 3px rgba(55, 55, 55, .3);
 }
-.pagination span{
+
+.pagination span {
     display: inline-block;
     margin: 0 3px;
     width: 16px;
@@ -51,11 +56,14 @@ ul{
     font-size: 10px;
     cursor: pointer;
 }
-.pagination span.on{
+
+.pagination span.on {
     color: #fff;
     background: #e30;
 }
-.prev,.next{
+
+.prev,
+.next {
     position: absolute;
     top: 160px;
     z-index: 99;
@@ -68,6 +76,7 @@ ul{
     background: rgba(55, 55, 55, .3);
     cursor: pointer;
 }
-.next{
+
+.next {
     right: 0;
 }
