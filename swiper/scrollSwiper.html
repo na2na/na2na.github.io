@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生js手写轮播插件</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="swiper.css">
+</head>
+<body>
+    <!-- 
+        关于轮播图：优势=>视觉上呈现最优展示效果，同时有多倍的空间展示不同的信息。
+        实现轮播的方式：1.偏移量实现左右滑动轮播；2.CSS3实现淡入淡出效果。
+        此案例作为学习原生js的素材，不断优化后，可作为个人常用插件
+    -->
+    
+    <!-- DOM -->
+    <div class="container" id="container">
+        <ul class="swiper" id="swiper"></ul>
+        <div class="pagination" id="pagination"></div>
+        <div class="prev" id="prev">&lt;</div>
+        <div class="next" id="next">&gt;</div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="scrollSwiper.js"></script>
+    
+</body>
+</html>

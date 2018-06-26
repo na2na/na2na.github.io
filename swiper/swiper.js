@@ -1,5 +1,6 @@
 function btnsEvent(){
-
+    // 改变偏移量轮播
+    
     var container = document.getElementById('container'),
         swiperBox = document.getElementById('swiper'),
         pagination = document.getElementById('pagination'),

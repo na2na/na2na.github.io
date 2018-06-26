@@ -48,13 +48,21 @@ ul {
 .pagination span {
     display: inline-block;
     margin: 0 3px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .8);
+    cursor: pointer;
+}
+.pagination-num span {
     width: 16px;
     height: 16px;
     line-height: 16px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, .8);
     font-size: 10px;
-    cursor: pointer;
+}
+.pagination-dot span {
+    width: 10px;
+    height: 10px;
+    line-height: 18px;
+    font-size: 0;
 }
 
 .pagination span.on {
